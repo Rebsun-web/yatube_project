@@ -1,7 +1,4 @@
 {% extends 'base.html' %}
-{% block group %}
-  <p>{{group}}</p>
-{% endblock %} 
 {% block content %}
   <div class = 'container'>
     <h1>{{group.title}}</h1>
@@ -9,7 +6,7 @@
       {{group.description}}
     </p> 
     <article>
-      {% for post.group.slug in posts.group %}
+      {% for post in posts %}
         <ul>
           <li>
             Автор: {{ post.author.get_full_name }}
@@ -19,7 +16,6 @@
           </li>
         </ul>
         <p>{{ post.text }}</p>    
-        <a href="">все записи группы</a>
         {% if not forloop.last %}<hr>{% endif %}
       {% endfor %} 
     </article>

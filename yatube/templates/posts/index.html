@@ -3,18 +3,22 @@
   <title>{{title}}</title>
 {% endblock %} {% endcomment %}
 {% block content %}
-  <h1>{{text}}</h1>
-  {% for post in posts %}
-    <ul>
-      <li>
-        Автор: {{ post.author.get_full_name }}
-      </li>
-      <li>
-        Дата публикации: {{ post.pub_date|date:"d E Y" }}
-      </li>
-    </ul>
-    <p>{{ post.text }}</p>    
-    <a href="{% url 'name_posts:name_posts_group_posts' %}">все записи группы</a>
-    {% if not forloop.last %}<hr>{% endif %}
-  {% endfor %} 
+  <div class = 'container'>
+    <h1>{{text}}</h1>
+    {% for post in posts %}
+      <ul>
+        <li>
+          Автор: {{ post.author.get_full_name }}
+        </li>
+        <li>
+          Дата публикации: {{ post.pub_date|date:"d E Y" }}
+        </li>
+      </ul>
+      <p>{{ post.text }}</p>
+      {% if post.group %}   
+        <a href="{% url 'posts:posts_group_posts' post.group.slug %}">все записи группы</a>
+      {% endif %}
+      {% if not forloop.last %}<hr>{% endif %}
+    {% endfor %} 
+    </div>
 {% endblock %}
